@@ -59,7 +59,7 @@ function UnControlledForm() {
 function ControlledForm() {
   const initialFormState = {
     myInput: '',
-    myCheckbox: true,
+    myCheckbox: false,
     myRadio: '',
   }
   const [formData, setFormData] = useState(initialFormState);
@@ -87,9 +87,12 @@ function ControlledForm() {
       <hr />
       <p>
         Radio buttons:
-        <label><input type="radio" name="myRadio" value="option1" /> Option 1</label>
-        <label><input type="radio" name="myRadio" value="option2" /> Option 2</label>
-        <label><input type="radio" name="myRadio" value="option3" /> Option 3</label>
+        <label><input type="radio" name="myRadio" value="option1" checked={formData.myRadio === 'option1'}
+            onChange={handleChange}/> Option 1</label>
+        <label><input type="radio" name="myRadio" value="option2" checked={formData.myRadio === 'option2'}
+            onChange={handleChange}/> Option 2</label>
+        <label><input type="radio" name="myRadio" value="option3" checked={formData.myRadio === 'option3'}
+            onChange={handleChange}/> Option 3</label>
       </p>
       <hr />
       <button onClick={()=>setFormData(initialFormState)}>Reset form</button>
