@@ -6,6 +6,7 @@ const PersonForm = () => {
     age: 0,
     gender: "",
     licensed: false,
+    level: "",
   });
 
   function handleSubmit(e) {
@@ -16,19 +17,22 @@ const PersonForm = () => {
     const formJson = Object.fromEntries(formData.entries());
     // change checkbox 'on' value to boolean
     formJson.licensed = formJson.licensed === "on";
+    console.log("FORM JSON: ", formJson);
 
     setPerson((prevPerson) => {
-        return { ...prevPerson, ...formJson }; //
+      return { ...prevPerson, ...formJson }; //
     });
-
   }
 
   return (
     <>
-      <h3>{person.name}</h3>
-        <p>{person.age}</p>
-        <p>{person.licensed?'Is licensed':'Is not licensed'}</p>
-        <p>{person.gender}</p>
+      <div style={{border: "1px solid orange", padding: "10px", margin: "10px"}}>
+        {person.name && <h3>Name: {person.name}</h3>}
+        {person.age && <p>Age: {person.age}</p>}
+        {person.licensed && <p>Licensed: {person.licensed ? "Is licensed" : "Is not licensed"}</p>}
+        {person.gender && <p>Gender: {person.gender}</p>}
+        {person.level && <p>Level: {person.level}</p>}
+      </div>
       <form method="post" onSubmit={handleSubmit}>
         <label>
           Enter name: <input name="name" placeholder="Enter your name" />
@@ -60,6 +64,15 @@ const PersonForm = () => {
           <label>
             <input type="radio" name="gender" value="Other" />
             Other
+          </label>
+          <br />
+          <label>
+          Enter Level:{" "}
+            <select name="level">
+              <option value="red">Red</option>
+              <option value="yellow">Yellow</option>
+              <option value="green">Green</option>
+            </select>
           </label>
           <br />
         </p>
